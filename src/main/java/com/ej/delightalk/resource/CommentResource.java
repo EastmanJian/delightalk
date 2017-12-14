@@ -1,5 +1,6 @@
 package com.ej.delightalk.resource;
 
+import com.ej.delightalk.vo.AddCommentParam;
 import com.ej.delightalk.vo.GetCommentsParam;
 
 import javax.ws.rs.*;
@@ -30,8 +31,10 @@ public class CommentResource {
     @Path("{siteName}/addComment")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addComment(@PathParam("siteName") String siteName) {
-
+    public Response addComment(@PathParam("siteName") String siteName, AddCommentParam param) {
+        System.out.println("param.pageURL=" + param.pageURL);
+        System.out.println("param.user=" + param.user);
+        System.out.println("param.comment=" + param.comment);
         return Response.ok().build();
     }
 }

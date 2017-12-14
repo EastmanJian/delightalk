@@ -121,15 +121,15 @@ RESTful Interface
 -----------------
 - get recent comments  
 ```
-curl -X GET -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"...", "lastN":10}' 'https://eastmanjian.cn/delightalk/{siteName}/getRecentComments/'
+curl -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"...", "lastN":10}' 'https://eastmanjian.cn/delightalk/{siteName}/getRecentComments/'
 e.g.
-curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"asdf", "lastN":10}' 'http://localhost:8080/delightalk/siteName/getRecentComments'
+curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"abc.com/path/subpath", "lastN":10}' 'http://localhost:8080/delightalk/siteName/getRecentComments'
 ```
 - add a comment
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"pageURL":"...", "user":"userName", "comment":"the content of the comment"}' 'https://eastmanjian.cn/delightalk/{siteName}/addComment/'
 e.g.
-curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"...", "user":"userName", "comment":"the content of the comment"}' 'http://localhost:8080/delightalk/siteName/addComment/'
+curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"abc.com/path/subpath", "user":"userName", "comment":"the content of the comment"}' 'http://localhost:8080/delightalk/siteName/addComment/'
 ```
 
 
