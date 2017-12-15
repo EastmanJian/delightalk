@@ -32,7 +32,7 @@ Whatever data store system is used (NoSQL or RDBMS), it exposes a common data ac
 ### 1) Redis
 #### Data Model
 ##### [List] Lists of comments per site page
-- Key:  comments:{siteName}:{md5EncodedPageURL}
+- Key:  comments:{siteName}:{PageUrlMD5}
 - values: {commentItemID} (md5 encoded Key+user+IP+timestamp)
 ##### [Hash] Comment Item
 - Key: comment:{commentItemID}
@@ -50,31 +50,31 @@ Whatever data store system is used (NoSQL or RDBMS), it exposes a common data ac
 e.g.
 ```
 RPUSH comments:ejBlog:9e9a5923e83e7db270518fc27e30cdca 0d5447138aeb12911af2a144884402c3
-HMSET comment:0d5447138aeb12911af2a144884402c3 user "Eastman" IP "116.23.248.169" timestamp 1513246350761 content "I'm happy today."
+HMSET comment:0d5447138aeb12911af2a144884402c3 user "Eastman" IP "116.23.248.169" timestamp 1513246350761 comment "I'm happy today."
 SADD siteURLs:ejBlog "9e9a5923e83e7db270518fc27e30cdca:eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing"
     
 RPUSH comments:ejBlog:9e9a5923e83e7db270518fc27e30cdca c7c895986c1503732e221e1d9158b8c3
-HMSET comment:c7c895986c1503732e221e1d9158b8c3 user "Anonymous" IP "116.23.248.169" timestamp 1513246350772 content "I'm sad today."
+HMSET comment:c7c895986c1503732e221e1d9158b8c3 user "Anonymous" IP "116.23.248.169" timestamp 1513246350772 comment "I'm sad today."
 SADD siteURLs:ejBlog "9e9a5923e83e7db270518fc27e30cdca:eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing"
 
 RPUSH comments:ejBlog:9e9a5923e83e7db270518fc27e30cdca aa2cf207c93e830c6cee26781b609370
-HMSET comment:aa2cf207c93e830c6cee26781b609370 user "Endora" IP "116.23.248.170" timestamp 1513246350783 content "I love dad."
+HMSET comment:aa2cf207c93e830c6cee26781b609370 user "Endora" IP "116.23.248.170" timestamp 1513246350783 comment "I love dad."
 SADD siteURLs:ejBlog "9e9a5923e83e7db270518fc27e30cdca:eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing"
 
 RPUSH comments:ejBlog:c8eff7d7d7059f68095372a802106c9f c9dd9c811465d2f40a29c12852d4a136
-HMSET comment:c9dd9c811465d2f40a29c12852d4a136 user "Violet" IP "116.23.248.171" timestamp 1513246350794 content "I miss you."
+HMSET comment:c9dd9c811465d2f40a29c12852d4a136 user "Violet" IP "116.23.248.171" timestamp 1513246350794 comment "I miss you."
 SADD siteURLs:ejBlog "c8eff7d7d7059f68095372a802106c9f:eastmanjian.cn/blog/2017/05/25/java-using-lambda-to-replace-anonymous-inner-class"
 
 RPUSH comments:ejBlog:c8eff7d7d7059f68095372a802106c9f dc111ad47363656efb1ec86b38986a4d
-HMSET comment:dc111ad47363656efb1ec86b38986a4d user "Tom" IP "116.23.248.172" timestamp 1513246350805 content "The quick brown fox."
+HMSET comment:dc111ad47363656efb1ec86b38986a4d user "Tom" IP "116.23.248.172" timestamp 1513246350805 comment "The quick brown fox."
 SADD siteURLs:ejBlog "c8eff7d7d7059f68095372a802106c9f:eastmanjian.cn/blog/2017/05/25/java-using-lambda-to-replace-anonymous-inner-class"
 
 RPUSH comments:anotherSite:bf98172bfa317c6abfc3883c62a7a96a c0856fdea57e655474a411f2e388beea
-HMSET comment:c0856fdea57e655474a411f2e388beea user "Alice" IP "116.23.248.173" timestamp 1513246350816 content "Jumps over the lazy dog."
+HMSET comment:c0856fdea57e655474a411f2e388beea user "Alice" IP "116.23.248.173" timestamp 1513246350816 comment "Jumps over the lazy dog."
 SADD siteURLs:anotherSite "bf98172bfa317c6abfc3883c62a7a96a:agilemanifesto.org/principles.html"
 
 RPUSH comments:anotherSite:bf98172bfa317c6abfc3883c62a7a96a 1f136f9a9c7a25002afa355cf2f0be4f
-HMSET comment:1f136f9a9c7a25002afa355cf2f0be4f user "Anonymous" IP "116.23.248.174" timestamp 1513246350816 content "I'm sorry."
+HMSET comment:1f136f9a9c7a25002afa355cf2f0be4f user "Anonymous" IP "116.23.248.174" timestamp 1513246350816 comment "I'm sorry."
 SADD siteURLs:anotherSite "bf98172bfa317c6abfc3883c62a7a96a:agilemanifesto.org/principles.html"
 ```
 (the md5 string might not match the url as they are example only.)
@@ -113,7 +113,7 @@ Common Data Access Interface
 The goal is that if switch data store to another platform (e.g. from Redis to MySQL), it just requires to configure the injection of the relevant data access implementation without changing the RESTful service layer who uses this common data access interface.
 ### Interface functions
   - getRecentComments(String siteName, String pageUrlMD5, int lastN)
-  - addComment(String siteName, String pageUrlMD5, Comment comment)
+  - addComment(String siteName, String pageUrlMD5, Comment comment, String ip)
   - housekeep(String siteName, int lastN)
 
 
