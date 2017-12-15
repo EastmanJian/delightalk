@@ -1,5 +1,6 @@
 package com.ej.delightalk.dao;
 
+import com.ej.delightalk.util.SSLUtil;
 import com.ej.delightalk.vo.Comment;
 import com.ej.delightalk.vo.RecentComments;
 import redis.clients.jedis.Jedis;
@@ -8,8 +9,8 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
 import java.io.*;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RedisCommentsDAO implements CommentsDAO {
     private static JedisPool pool;
@@ -32,24 +33,46 @@ public class RedisCommentsDAO implements CommentsDAO {
 
     @Override
     public RecentComments getRecentComments(String siteName, String pageUrl, int lastN) {
+        String pageUrlMD5 = SSLUtil.MD5(pageUrl);
+        String pageKey = "comments:" + siteName + ":" + pageUrlMD5;
+        RecentComments recentComments = new RecentComments();
         try (Jedis jedis = pool.getResource()) {
-            jedis.set("RedisCommentsDAO", "bar");
-            String foobar = jedis.get("RedisCommentsDAO");
-            jedis.zadd("sose", 0, "car");
-            jedis.zadd("sose", 0, "bike");
-            Set<String> sose = jedis.zrange("sose", 0, -1);
+            List<String> pageComments = jedis.lrange(pageKey, -lastN, -1);
+            for (String commentItemID : pageComments) {
+                Map<String, String> commentMap = jedis.hgetAll("comment:" + commentItemID);
+                Comment comment = new Comment(
+                        commentMap.get("user"),
+                        commentMap.get("IP"),
+                        Long.valueOf(commentMap.get("timestamp")),
+                        commentMap.get("comment")
+                );
+                recentComments.addComment(comment);
+            }
         }
-        return null;
+        return recentComments;
     }
 
     @Override
-    public void addComment(String siteName, String pageUrl, Comment comment, String ip) {
-
+    public void addComment(String siteName, String pageUrl, String user, String ip, String comment) {
+        long timestamp = new Date().getTime();
+        String pageUrlMD5 = SSLUtil.MD5(pageUrl);
+        String pageKey = "comments:" + siteName + ":" + pageUrlMD5;
+        String commentItemID = SSLUtil.MD5(pageUrl + user + ip + timestamp);
+        try (Jedis jedis = pool.getResource()) {
+            jedis.rpush(pageKey, commentItemID);
+            Map<String, String> commentMap = new ConcurrentHashMap();
+            commentMap.put("user", user);
+            commentMap.put("IP", ip);
+            commentMap.put("timestamp", "" + timestamp);
+            commentMap.put("comment", comment);
+            jedis.hmset("comment:" + commentItemID, commentMap);
+            jedis.sadd("siteURLs:" + siteName, pageUrlMD5 + ":" + pageUrl);
+        }
     }
 
     @Override
     public void housekeep(String siteName, int lastN) {
-
+        //Todo
     }
 
     public static void closePool() {

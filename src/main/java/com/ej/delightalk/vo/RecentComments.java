@@ -6,6 +6,7 @@ import java.util.List;
 
 @XmlRootElement
 public class RecentComments {
+
     public List<Comment> recentComments;
 
     public RecentComments() {
@@ -15,4 +16,10 @@ public class RecentComments {
     public void addComment(Comment comment) {
         recentComments.add(comment);
     }
+
+    public List<Comment> getRecentComments() {
+        return recentComments;
+    }
+
+
 }
