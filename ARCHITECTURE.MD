@@ -122,13 +122,13 @@ RESTful Interface
 ```
 curl -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"...", "lastN":10}' 'https://eastmanjian.cn/delightalk/{siteName}/getRecentComments/'
 e.g.
-curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"abc.com/path/subpath", "lastN":10}' 'http://localhost:8080/delightalk/siteName/getRecentComments'
+curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "lastN":10}' 'http://localhost:8080/delightalk/rest/ejBlog/getRecentComments'
 ```
 - add a comment
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"pageURL":"...", "user":"userName", "comment":"the content of the comment"}' 'https://eastmanjian.cn/delightalk/{siteName}/addComment/'
 e.g.
-curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"abc.com/path/subpath", "user":"userName", "comment":"the content of the comment"}' 'http://localhost:8080/delightalk/siteName/addComment/'
+curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "user":"userName", "comment":"Thank you. ありがとうございました. спасибо. 谢谢. ขอบคุณครับ. "}' 'http://localhost:8080/delightalk/rest/ejBlog/addComment/'
 ```
 
 
