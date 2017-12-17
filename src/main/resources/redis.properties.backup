@@ -1,4 +1,6 @@
 #Redis connection parameters
+#This is a backup copy in order to show the format of redis.properties.
+#Rename this back to redis.properties and configure the correct parameters of your Redis server.
 host=VM_95_53_centos
 port=6379
 pass=chuangqianmingyueguangYishidishangshuang
