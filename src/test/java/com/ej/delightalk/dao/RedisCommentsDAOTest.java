@@ -25,9 +25,9 @@ public class RedisCommentsDAOTest {
     public void getRecentComments() throws Exception {
         CommentsDAO dao = new RedisCommentsDAO();
         RecentComments rc = dao.getRecentComments("ejBlog", "eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", 10);
-        Gson gson = new Gson();
-        String json = gson.toJson(rc);
-        System.out.println("json=" + json);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(rc);
+//        System.out.println("json=" + json);
         for (Comment comment: rc.getRecentComments()) {
             System.out.println("user=" + comment.user);
             System.out.println("ip=" + comment.ip);
@@ -42,7 +42,7 @@ public class RedisCommentsDAOTest {
         dao.addComment("ejBlog", "eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "Eastman", "116.23.248.169", "I'm good! 我很好"); //default is UTF-8 encoding
         dao.addComment("ejBlog", "eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "Eastman", "116.23.248.169", new String("Thank you! 谢谢！!@#$%^&*()_+=-[];',./{}:\"<>?".getBytes(), "UTF-8"));
         dao.addComment("ejBlog", "eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "Eastman", "116.23.248.169", "And you?");
-        dao.addComment("ejBlog", "eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "Eastman", "116.23.248.169", "试试中文");
+        dao.addComment("ejBlog", "eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "Eastman", "116.23.248.169", "Good bye! 再见! 良いさよなら! до свидания! ลาก่อน!");
     }
 
     @Test
