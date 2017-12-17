@@ -1,3 +1,7 @@
+#properties files
+src/main/resources/redis.properties
+
+
 # IntelliJ .idea folder
 .idea/
 out
@@ -8,5 +12,3 @@ lib/
 
 #temp files
 
-#properties files
-src/main/resources/redis.properties
