@@ -7,3 +7,6 @@ target/
 lib/
 
 #temp files
+
+#properties files
+src/main/resources/redis.properties
