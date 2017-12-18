@@ -60,6 +60,11 @@
                 }
             });
         }
+
+        function testBtnClicked () {
+            let url = window.location;
+            $("#testResult").text(url);
+        }
     </script>
 </head>
 <body>
@@ -77,6 +82,11 @@
     <textarea id="comment" style="width: 300px; height: 200px">Beautiful. สวยงาม. 美丽的. 美しい. красивая</textarea>
     <br/>
     <button id="addCommentBtn" onclick="addComment()">Publish</button>
+</section>
+<hr/>
+<section id="anyTest">
+    <button onclick="testBtnClicked()">Test</button><br/>
+    <div id="testResult">Test result data</div>
 </section>
 </body>
 </html>
