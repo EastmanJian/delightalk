@@ -14,34 +14,39 @@ Data Elements
     - IP
     - timestamp
     - content
+    - agree [Todo]
+    - disagree [Todo]
+    - emoji
 
 Access Pattern
 --------------
 ### Front-end
 - read recent n comments for a page
 - insert a new comment
-- modify a comment (Todo)
-- delete a comment (Todo)
+- read last N to M comments (for the 'more comments' feature) [Todo]
+- modify a comment [Todo]
+- delete a comment [Todo]
+- increase agree [Todo]
 
 ### Management Console
-(Todo)
+[Todo]
 
 Data Store
 ----------
 Whatever data store system is used (NoSQL or RDBMS), it exposes a common data access interface.      
 ### 1) Redis
 #### Data Model
-##### [List] Lists of comments per site page
+##### **List** - Lists of comments per site page
 - Key:  comments:{siteName}:{PageUrlMD5}
 - values: {commentItemID} (md5 encoded PageUrl+user+IP+timestamp)
-##### [Hash] Comment Item
+##### **Hash** - Comment Item
 - Key: comment:{commentItemID}
 - fields:
     - user
     - IP
     - timestamp
     - comment
-##### [Set] URL set of a Site
+##### **Set** - URL set of a Site
 - Key: siteURLs:{siteName}
 - values: {md5EncodedPageURL}|{pageURL}
 
@@ -103,7 +108,7 @@ LTRIM "comments:ejBlog:9e9a5923e83e7db270518fc27e30cdca" -100 -1
 ...
 ```
 
-### 2) MySQL (Todo)
+### 2) MySQL [Todo]
 
 
 
@@ -113,7 +118,7 @@ The goal is that if switch data store to another platform (e.g. from Redis to My
 ### Interface functions
   - getRecentComments(String siteName, String pageUrlMD5, int lastN)
   - addComment(String siteName, String pageUrlMD5, Comment comment, String ip)
-  - housekeep(String siteName, int lastN)
+  - housekeep(String siteName, int lastN) [Todo]
 
 
 RESTful Interface
@@ -136,9 +141,25 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.
 
 Front-end Javascript Embedding
 ------------------------------
+### Functional Design
+- An add comment section go first
+- Follow by the recent n comments section.
+- 'More comments', when user click the 'more' button, display last 2n/3n/4n/... historical comments for each click, until all the historical comments are retrieved. [Todo]
+- display where is the user from by identify the geo-source of the IP [Todo]
+- limit the word count of a input comment [Todo]
+- a few random placeholder words or sentences [Todo]
+
+### UI Design
+- flat publish button
+- placeholder's color should be darker
+- rounded corner
+- dashed separating lines between comments
+- icon for user and timestamp
+
+
 ### Configuration
 - site name
-- how many historical comments for a page should be displayed (optional)
+- how many historical comments for a page should be displayed 
 
 
 Management Console

@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cmn-Hans-CN" lang="zh-cmn-Hans-CN">
+<head>
+    <title>Article 1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://use.fontawesome.com/8250839e6b.js"></script>
+</head>
+<body>
+<header>
+    <h2>Uber used covert 'undercover agents', says court letter</h2>
+</header>
+<article>
+    <p>Uber set up a covert unit tasked with stealing competitors' secrets and engaging in undercover surveillance, a
+        letter published by a US court on Friday has alleged.</p>
+
+    <p>It is critical evidence in Uber's legal battle with Waymo, the self-driving car company that accuses the
+        ride-sharing firm of stealing its technology.</p>
+
+    <p>The letter, sent by lawyers representing a former Uber employee, sparked an internal investigation when it was
+        sent to Uber in May, but has not been made public until now.</p>
+
+    <p>In a statement, Uber said: "While we haven’t substantiated all the claims in this letter - and, importantly, any
+        related to Waymo - our new leadership has made clear that going forward we will compete honestly and fairly, on
+        the strength of our ideas and technology."</p>
+
+    <p>The allegations in the letter were made by Richard Jacobs, who worked at Uber until February this year. He left
+        after an incident in which he felt he was unfairly demoted. Shortly afterwards, he sent the letter alleging the
+        misconduct.</p>
+
+    <p>"These tactics were employed clandestinely through a distributed architecture of anonymous servers,
+        telecommunications architecture, and non-attributable hardware and software," the letter read.</p>
+
+</article>
+
+<div id="delightalk">
+    <section id="addComment">
+        Comment: <br/>
+        <textarea id="comment" style="width: 500px; height: 120px" placeholder="Don't hold your fire."></textarea>
+        <br/>
+        Name: <input id="userName" type="text" name="user" placeholder="Anonymous"/>
+        <button id="addCommentBtn" onclick="addComment()">Publish</button>
+    </section>
+    <hr/>
+    <section id="recentComments">
+    </section>
+</div>
+<script>
+    var siteName = 'ejBlog';
+    var pageUrlId = location.hostname + location.pathname;
+
+    function addComment() {
+        let user = $("#userName").val();
+        let userName = (user == "")? "Anonymous" : user;
+        let commentContent =  $("#comment").val();
+        if (commentContent == "") return;
+        let commentItem = {
+            pageURL: pageUrlId,
+            user: userName,
+            comment: commentContent
+        };
+        $.ajax({
+            //url: 'http://localhost:8080/delightalk/rest/' + siteName + '/addComment/',  //local test
+            url: 'https://eastmanjian.cn/delightalk/rest/' + siteName + '/addComment/',    //remote server test
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(commentItem),
+            dataType: 'json',
+            crossDomain: true,
+            statusCode: {
+                200: function() {
+                    console.log("comment added.");
+                    $("#addCommentBtn").text("Your comment is published.").attr("disabled", true);
+                    $("#comment").val("");
+                    setTimeout(function (){
+                        $("#addCommentBtn").text("Publish").attr("disabled", false);
+                    }, 1500)
+                    getRecentComments();
+                }
+            }
+        });
+    }
+
+
+    function getRecentComments() {
+        let howManyComments = 10;
+        let requestData = {
+            pageURL: pageUrlId,
+            lastN: howManyComments
+        };
+        $.ajax({
+            //url: 'http://localhost:8080/delightalk/rest/' + siteName + '/getRecentComments',  //local server test
+            url: 'https://eastmanjian.cn/delightalk/rest/'+ siteName + '/getRecentComments',  //remote server test
+            type: 'PUT',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            crossDomain: true,
+            success: function (data) {
+                console.log(data);
+                renderRecentComments(data);
+            }
+        });
+    }
+
+    function renderRecentComments(data) {
+        let htmlTxt = '';
+        for (i=data.recentComments.length - 1; i>=0 ; i--) {
+            htmlTxt += '<div id="aComment">';
+            htmlTxt +=   '<header>';
+            htmlTxt +=      '<i class="fa fa-user" aria-hidden="true"></i>';
+            htmlTxt +=      '<span id="commentUser">';
+            htmlTxt +=        data.recentComments[i].user + ' ';
+            htmlTxt +=      '</span>';
+            htmlTxt +=      '<i class="fa fa-clock-o" aria-hidden="true"></i>';
+            htmlTxt +=      '<span id="commentDate">';
+            htmlTxt +=        (new Date(data.recentComments[i].timestamp)).Format("yyyy-MM-dd hh:mm:ss");
+            htmlTxt +=      '</span>';
+            htmlTxt +=   '</header>';
+            htmlTxt +=   '<article>';
+            htmlTxt +=      data.recentComments[i].comment;
+            htmlTxt +=   '</article>';
+            htmlTxt += '</div>';
+            htmlTxt += '</br>';
+        }
+        $("#recentComments").html(htmlTxt);
+
+    }
+
+    /**
+     * Data format function
+     * Extend Date object to provide a format method
+     *
+     * e.g.
+     * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+     * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+     */
+    Date.prototype.Format = function(fmt) {
+        let o = {
+            "M+" : this.getMonth()+1,
+            "d+" : this.getDate(),
+            "h+" : this.getHours(),
+            "m+" : this.getMinutes(),
+            "s+" : this.getSeconds(),
+            "q+" : Math.floor((this.getMonth()+3)/3),
+            "S"  : this.getMilliseconds()
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(let k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    };
+
+    (function (){
+        getRecentComments();
+    })();
+</script>
+
+</body>
+</html>
