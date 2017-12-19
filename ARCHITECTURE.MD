@@ -129,21 +129,26 @@ The goal is that if switch data store to another platform (e.g. from Redis to My
   - housekeep(String siteName, int lastN) [Todo]
 
 
+Redis DAO implementation
+------------------------
+- Use Jedis API.
+- Server side logging: Log the new or altered keys-value object.
+
 RESTful Interface
 -----------------
 - get recent comments  
 ```
 curl -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"...", "lastN":10}' 'https://eastmanjian.cn/delightalk/{siteName}/getRecentComments/'
 e.g.
-curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "lastN":10}' 'http://localhost:8080/delightalk/rest/ejBlog/getRecentComments'
-curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "lastN":10}' 'https://eastmanjian.cn/delightalk/rest/ejBlog/getRecentComments'
+curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"ejTest.cn/blog/2017/05/07/using-markdown-for-web-writing", "lastN":10}' 'http://localhost:8080/delightalk/rest/ejTest/getRecentComments'
+curl -i -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"pageURL":"ejTest.cn/blog/2017/05/07/using-markdown-for-web-writing", "lastN":10}' 'https://eastmanjian.cn/delightalk/rest/ejTest/getRecentComments'
 ```
 - add a comment
 ```
 curl -X POST -H 'Content-Type: application/json' -d '{"pageURL":"...", "user":"userName", "comment":"the content of the comment"}' 'https://eastmanjian.cn/delightalk/{siteName}/addComment/'
 e.g.
-curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "user":"userName", "comment":"Thank you. ありがとうございました. спасибо. 谢谢. ขอบคุณครับ. "}' 'http://localhost:8080/delightalk/rest/ejBlog/addComment/'
-curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"eastmanjian.cn/blog/2017/05/07/using-markdown-for-web-writing", "user":"userName", "comment":"Hello. こんにちは. привет. 你好. สวัสดี. "}' 'https://eastmanjian.cn/delightalk/rest/ejBlog/addComment/'
+curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"ejTest.cn/blog/2017/05/07/using-markdown-for-web-writing", "user":"userName", "comment":"Thank you. ありがとうございました. спасибо. 谢谢. ขอบคุณครับ. "}' 'http://localhost:8080/delightalk/rest/ejTest/addComment/'
+curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"ejTest.cn/blog/2017/05/07/using-markdown-for-web-writing", "user":"userName", "comment":"Hello. こんにちは. привет. 你好. สวัสดี. "}' 'https://eastmanjian.cn/delightalk/rest/ejTest/addComment/'
 ```
 
 
@@ -153,11 +158,11 @@ Front-end Javascript Embedding
 - An add comment section go first
 - Follow by the recent n comments section.
 - save user name at local storage [Todo]
+- a few random placeholder words or sentences [Todo]
 - make delightParams default values, so that setting delightParams is optional to user. [Todo]
 - 'More comments', when user click the 'more' button, display last 2n/3n/4n/... historical comments for each click, until all the historical comments are retrieved. [Todo]
 - display where is the user from by identify the geo-source of the IP [Todo]
 - limit the word count of a input comment [Todo]
-- a few random placeholder words or sentences [Todo]
 
 ### UI Design (CSS)
 - 100% width of comment input, fixed height, rounded corner, focused style.
