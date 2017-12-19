@@ -67,7 +67,16 @@ public class RedisCommentsDAO implements CommentsDAO {
             commentMap.put("comment", comment);
             jedis.hmset("comment:" + commentItemID, commentMap);
             jedis.sadd("siteURLs:" + siteName, pageUrlMD5 + ":" + pageUrl);
+            //Expire other sites comments except the service provider site. So that the LFU eviction policy takes effect.
+            if (!pageUrl.contains("eastmanjian.cn")) {
+                int seconds = 5*365*24*60*60; //5 years
+                jedis.expire(pageKey, seconds);
+                jedis.expire("comment:" + commentItemID, seconds);
+            }
         }
+        System.out.println("RPUSH " + pageKey + " " + commentItemID);
+        System.out.println("HMSET " + "comment:" + commentItemID);
+        System.out.println("SADD " + "siteURLs:" + siteName + " " + pageUrlMD5 + ":" + pageUrl);
     }
 
     @Override

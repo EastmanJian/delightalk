@@ -9,6 +9,8 @@ public class Comment {
     public long timestamp;
     public String comment;
 
+    public Comment() {}
+
     public Comment(String user, String ip, long timestamp, String comment) {
         this.user = user;
         this.ip = ip;

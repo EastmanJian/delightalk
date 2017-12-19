@@ -7,5 +7,4 @@ public class AddCommentParam {
     public String pageURL;
     public String user;
     public String comment;
-
 }

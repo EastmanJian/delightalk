@@ -103,7 +103,7 @@ Redis config:(redis.conf)
 maxmemory 100mb
 maxmemory-policy volatile-lfu
 
-Note: the request from domain eastmanjian.cn will be out of the eviction by setting the keys without expiry. [Todo] 
+Note: expire all keys in 5 years except keys from domain eastmanjian.cn which is the service provider  
 
 ##### data housekeeping
 e.g. keep last 100 comments for each page of a site

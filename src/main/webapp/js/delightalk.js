@@ -44,7 +44,13 @@ function addDelightalkComment() {
     let user = document.querySelector("#delightalkUserName").value;
     let userName = (user == "") ? "Anonymous" : user;
     let commentContent = document.querySelector("#delightalkCommentInput").value;
-    if (commentContent == "") return;
+    if (commentContent == "") {
+        document.querySelector("#delightalkCommentInput").focus();
+        return;
+    }
+    let btnAddComment = document.querySelector("#addDelightalkCommentBtn")
+    btnAddComment.innerText = "Publishing";
+    btnAddComment.disabled = true;
     let commentItem = {
         pageURL: delightParams.pageUrlId,
         user: userName,
@@ -66,7 +72,6 @@ function addDelightalkComment() {
 function doneAddDelightalkComment() {
     let btnAddComment = document.querySelector("#addDelightalkCommentBtn")
     btnAddComment.innerText = "Published";
-    btnAddComment.disabled = true;
     document.querySelector("#delightalkCommentInput").value = "";
     setTimeout(function () {
         btnAddComment.innerText = " Publish ";
@@ -109,7 +114,7 @@ function renderRecentComments(jsonString) {
     let data = JSON.parse(jsonString);
     let htmlTxt = '';
     for (i = data.recentComments.length - 1; i >= 0; i--) {
-        htmlTxt += '<div class="aDelightalkComment">';
+        htmlTxt += '<div class="a-delightalk-comment">';
         htmlTxt +=   '<header id="recentCmtHeader">';
         htmlTxt +=     '<span id="delightalkCommentUser">';
         htmlTxt +=       '<i class="fa fa-user comment-icon" aria-hidden="true"></i>';
@@ -170,15 +175,16 @@ function escapeHtml(html)
 
 
 /**
- * Initiatial render of the skeleton of deligtalk comment sections
+ * Initial render of the skeleton of Deligtalk comment sections
  */
 function renderDelightalkSkeleton() {
     let htmlTxt = '';
     htmlTxt += '<section id="addDelightalkComment">';
-    htmlTxt +=   '<textarea id="delightalkCommentInput" class="shadowFocus" placeholder="I like this page. I delight in talking about this."></textarea>';
+    htmlTxt +=   '<textarea id="delightalkCommentInput" class="shadow-focus" placeholder="I like this page. I delight in talking about this."></textarea>';
     htmlTxt +=   '<footer id="addDelightalkCmtFooter">';
-    htmlTxt +=     '<button id="addDelightalkCommentBtn" class="shadowFocus" onclick="addDelightalkComment()"> Publish </button>';
-    htmlTxt +=     '<input id="delightalkUserName" class="shadowFocus" type="text" name="user" placeholder="Anonymous"/>';
+    htmlTxt +=     '<button id="addDelightalkCommentBtn" class="shadow-focus float-right" onclick="addDelightalkComment()"> Publish </button>';
+    htmlTxt +=     '<input id="delightalkUserName" class="shadow-focus float-right" type="text" name="user" placeholder="Anonymous"/>';
+    htmlTxt +=     '<i class="fa fa-user comment-icon float-right" aria-hidden="true"></i>';
     htmlTxt +=   '</footer>';
     htmlTxt += '</section>';
     htmlTxt += '<hr id="CmtInputDispSplit"/>';
