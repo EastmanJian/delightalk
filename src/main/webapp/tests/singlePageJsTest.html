@@ -1,0 +1,193 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cmn-Hans-CN" lang="zh-cmn-Hans-CN">
+<head>
+    <title>Article 1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://use.fontawesome.com/8250839e6b.js"></script>
+</head>
+<body>
+<header>
+    <h2>Uber used covert 'undercover agents', says court letter</h2>
+</header>
+<article>
+    <p>US Secretary of State Rex Tillerson said North Korea must "earn its way back to the table" for negotiations
+        between the two countries to restart.</p>
+
+    </p>Mr Tillerson said Pyongyang had to carry out a "sustained cessation" of weapons testing before any talks.</p>
+
+    </p>It is a U-turn from comments made earlier this week, when Mr Tillerson said the US was "ready to talk any time
+        time North Korea would like to talk".</p>
+
+    </p>That remark was swiftly contradicted by the White House.</p>
+
+    </p>What missiles does North Korea have?  How North Korea could tip the balance
+        North Korea has carried out repeated nuclear and ballistic missile tests this year, in defiance of global
+        condemnation and increasingly heavy international sanctions.</p>
+
+    </p>Earlier this week Mr Tillerson said: "Let's just meet and let's talk about the weather if you want and talk
+        about whether it's going to be a square table or a round table if that's what you're excited about.</p>
+
+    </p>"Then we can begin to lay out a map, a road map, of what we might be willing to work towards."</p>
+
+    </p>Rex Tillerson at the UN security council meetingImage copyrightREUTERS Image caption
+        There are reports that Mr Tillerson had planned to repeat his offer of talks without preconditions
+        But his remarks, welcomed by China and Russia, were promptly greeted with a rebuttal from the White House and a
+        reiteration that North Korea must admit to abandoning its nuclear weapons before talks resume.</p>
+
+    </p>Within just a few hours press secretary Sarah Saunders released a statement to reporters saying Mr Trump's views
+        "have not changed".</p>
+
+    </p>"North Korea is acting in an unsafe way not only toward Japan, China, and South Korea, but the entire world,"
+        she said.</p>
+
+</article>
+
+<div id="delightalk">
+    <section id="addComment">
+        Comment: <br/>
+        <textarea id="comment" style="width: 500px; height: 120px" placeholder="Don't hold your fire."></textarea>
+        <br/>
+        Name: <input id="userName" type="text" name="user" placeholder="Anonymous"/>
+        <button id="addCommentBtn" onclick="addComment()">Publish</button>
+    </section>
+    <hr/>
+    <section id="recentComments">
+    </section>
+</div>
+<script>
+    var siteName = 'ejBlog';
+    var pageUrlId = location.hostname + location.pathname;
+
+    function ajaxRestReq(params) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    resolve(xhr.responseText);
+                } else {
+                    reject("Server Error: " + xhr.status);
+                }
+            }
+            xhr.onerror = () => {
+                reject("Cannot Make AJAX Request");
+            }
+            xhr.open(params.type, params.url, true);
+            xhr.setRequestHeader("Content-type", params.contentType);
+            xhr.setRequestHeader("Accept", params.accept);
+            xhr.send(params.data);
+        });
+    }
+
+    function addComment() {
+        let user = document.querySelector("#userName").value;
+        console.log("user=" + user);
+        let userName = (user == "") ? "Anonymous" : user;
+        let commentContent = document.querySelector("#comment").value;
+        console.log("commentContent=" + commentContent);
+        if (commentContent == "") return;
+        let commentItem = {
+            pageURL: pageUrlId,
+            user: userName,
+            comment: commentContent
+        };
+        ajaxRestReq({
+            //url: 'http://localhost:8080/delightalk/rest/' + siteName + '/addDelightalkComment/',  //local test
+            url: 'https://eastmanjian.cn/delightalk/rest/' + siteName + '/addComment/',    //remote server test
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(commentItem),
+            accept: 'application/json',
+        }).then(doneAddComment, logErr);
+    }
+
+    function doneAddComment () {
+        console.log("comment added.");
+        let btnAddComment = document.querySelector("#addCommentBtn")
+        btnAddComment.innerText = "Your comment is published.";
+        btnAddComment.disabled = true;
+        document.querySelector("#comment").value = "";
+        setTimeout(function () {
+            btnAddComment.innerText = "Publish";
+            btnAddComment.disabled = false;
+        }, 1500)
+        getRecentComments();
+    }
+
+    function logErr (reason) {
+        console.log(reason);
+    }
+
+
+    function getRecentComments() {
+        let howManyComments = 10;
+        let requestData = {
+            pageURL: pageUrlId,
+            lastN: howManyComments
+        };
+        ajaxRestReq({
+            //url: 'http://localhost:8080/delightalk/rest/' + siteName + '/getRecentComments',  //local server test
+            url: 'https://eastmanjian.cn/delightalk/rest/' + siteName + '/getRecentComments',  //remote server test
+            type: 'PUT',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(requestData),
+            accept: 'application/json',
+        }).then(renderRecentComments, logErr);
+    }
+
+    function renderRecentComments(jsonString) {
+        console.log (jsonString);
+        let data = JSON.parse(jsonString);
+        let htmlTxt = '';
+        for (i = data.recentComments.length - 1; i >= 0; i--) {
+            htmlTxt += '<div id="aComment">';
+            htmlTxt += '<header>';
+            htmlTxt += '<i class="fa fa-user" aria-hidden="true"></i>';
+            htmlTxt += '<span id="commentUser">';
+            htmlTxt += data.recentComments[i].user + ' ';
+            htmlTxt += '</span>';
+            htmlTxt += '<i class="fa fa-clock-o" aria-hidden="true"></i>';
+            htmlTxt += '<span id="commentDate">';
+            htmlTxt += (new Date(data.recentComments[i].timestamp)).Format("yyyy-MM-dd hh:mm:ss");
+            htmlTxt += '</span>';
+            htmlTxt += '</header>';
+            htmlTxt += '<article>';
+            htmlTxt += data.recentComments[i].comment;
+            htmlTxt += '</article>';
+            htmlTxt += '</div>';
+            htmlTxt += '</br>';
+        }
+        document.querySelector("#recentComments").innerHTML = htmlTxt;
+    }
+
+    /**
+     * Data format function
+     * Extend Date object to provide a format method
+     *
+     * e.g.
+     * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+     * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+     */
+    Date.prototype.Format = function (fmt) {
+        let o = {
+            "M+": this.getMonth() + 1,
+            "d+": this.getDate(),
+            "h+": this.getHours(),
+            "m+": this.getMinutes(),
+            "s+": this.getSeconds(),
+            "q+": Math.floor((this.getMonth() + 3) / 3),
+            "S": this.getMilliseconds()
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (let k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    (function () {
+        getRecentComments();
+    })();
+</script>
+
+</body>
+</html>

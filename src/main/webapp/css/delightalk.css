@@ -1,0 +1,95 @@
+#delightalk * {
+    box-sizing: border-box;
+}
+
+#delightalkCommentInput {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    border: 1px solid darkgray;
+    padding:10px 10px;
+    background: ghostwhite;
+    border-radius: 5px;
+    outline: none; /*disable the focus outline which is not rounded corner*/
+}
+
+.shadowFocus:focus {
+    box-shadow: 0 0 1px 2px deepskyblue; /* use shadow to show the rounded corner effect instead of outline*/
+}
+
+#addDelightalkCmtFooter {
+    height: 2em;
+}
+
+#delightalkUserName {
+    width: 12em;
+    height: 1.8em;
+    float: right;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    outline: none;
+    margin: 0.3em 0.5em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#addDelightalkCommentBtn {
+    width: 10em;
+    height: 1.8em;
+    float: right;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    margin: 0.3em 0 0.3em 0.5em;
+    font-weight: 800;
+}
+
+#addDelightalkCommentBtn:hover {
+    background-color: floralwhite;
+}
+
+
+*::-webkit-input-placeholder {
+    color: darkgray;
+}
+
+*::-moz-placeholder {
+    color: darkgray;
+}
+
+*:-ms-input-placeholder {
+    color: darkgray;
+}
+
+.aDelightalkComment {
+    border-bottom: 1px dashed lightgray;
+}
+
+#delightalkCommentContent {
+    margin: 0.5em 0.2em;
+}
+
+#recentCmtHeader {
+    margin: 0.5em 0.5em;
+    background: none;
+    height: 1.5em;
+    box-shadow: none;
+}
+
+.comment-icon {
+    color: slategray;
+}
+
+#delightalkCommentDate {
+    float: right;
+
+}
+
+#CmtInputDispSplit {
+    with: 100%;
+    height: 5px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 3px;
+}
+
+

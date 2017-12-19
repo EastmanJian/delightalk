@@ -98,6 +98,14 @@ SMEMBERS siteURLs:ejBlog
 ```
 
 #### Housekeeping, data limits, memory limit
+##### memory limit and eviction in case OOM
+Redis config:(redis.conf)
+maxmemory 100mb
+maxmemory-policy volatile-lfu
+
+Note: the request from domain eastmanjian.cn will be out of the eviction by setting the keys without expiry. [Todo] 
+
+##### data housekeeping
 e.g. keep last 100 comments for each page of a site
 ```
 SMEMBERS siteURLs:ejBlog
@@ -144,17 +152,21 @@ Front-end Javascript Embedding
 ### Functional Design
 - An add comment section go first
 - Follow by the recent n comments section.
+- save user name at local storage [Todo]
+- make delightParams default values, so that setting delightParams is optional to user. [Todo]
 - 'More comments', when user click the 'more' button, display last 2n/3n/4n/... historical comments for each click, until all the historical comments are retrieved. [Todo]
 - display where is the user from by identify the geo-source of the IP [Todo]
 - limit the word count of a input comment [Todo]
 - a few random placeholder words or sentences [Todo]
 
-### UI Design
-- flat publish button
+### UI Design (CSS)
+- 100% width of comment input, fixed height, rounded corner, focused style.
+- name input and button align right, rounded corner
+- horizontal line has height, rounded corner, flat
 - placeholder's color should be darker
-- rounded corner
 - dashed separating lines between comments
-- icon for user and timestamp
+- timestamp align right
+- icon for user and timestamp, gray color
 
 
 ### Configuration
@@ -164,7 +176,7 @@ Front-end Javascript Embedding
 
 Management Console
 ------------------
-(Todo)
+[Todo]
 
 Concurrency
 -----------
