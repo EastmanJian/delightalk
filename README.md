@@ -37,7 +37,7 @@ Features
 How to plug Delightalk into your website?
 -----------------------------------------
 ### Using existing REST service provided by eastmanjian.cn
-Plug the following codes into your web page where you wish the comments appear.
+The easiest way is just to plug the following codes into your web page where you wish the comments appear.
 ```html
 <!-- Delightalk codes --> 
 <div id="delightalk"></div>
@@ -46,24 +46,26 @@ Plug the following codes into your web page where you wish the comments appear.
 <script>var delightParams = {siteName: "your_app_id", previousComments: 10};</script>
 <script src="https://eastmanjian.cn/delightalk/js/delightalk.js"></script>
 ```
-Specify your your web application id (your_app_id) and the number of comments to show (previousComments).  
+In the *delightParams*, specify your your web application id (*your_app_id*) and the number of comments to show (*previousComments*).  
+**That's All!**  
+You'll be able to see the Delightalk comment section in your web page.  
   
-By doing this, you use the shared data storage in eastmanjian.cn. Where a Redis in-memory data storage is provided. But due to memory limitation. Currently only reserved 100mb for all users (not each user :-). If the data exceed 100mb, data will be evicted on a LFU (Least Frequently Usage) basis.  
-Alternatively, you can setup your own data storage and REST service in your own server, as describe below. 
+By doing this, you use the shared data storage in eastmanjian.cn, where a Redis in-memory data storage is provided. But due to memory limitation, currently only 100mb memory is reserved for all users (not each user :-). If the data exceed 100mb, they will be evicted on a LFU (Least Frequently Usage) basis.  
+Alternatively, you can setup your own data storage and REST service in your own server, as describe below.  
 
 ### Setup data storage and REST service
 1. Download the whole Delightalk project from GitHub.
 2. Setup Redis (4.0.2 or above). For detail, refer to https://redis.io/download.
 3. Configure *src/main/resources/redis.properties* for the Redis connection parameters.
 4. Change the *delightParams.restServiceUrl* parameter in *src/main/webapp/js/delightalk.js* to your domain URL location
-e.g.
+e.g.  
 ```
 "https://your.domian.name/delightalk/rest/"; 
 ```
 5. Build the project by Maven. e.g. 'mvn package'
 6. Deploy the generated delightalk.war to your web application server.
 7. Change the URL for *delightalk.css* and *delightalk.js* in the plugin codes.
-e.g.
+e.g.  
 ```html
 <!-- Delightalk codes --> 
 <div id="delightalk"></div>
@@ -74,7 +76,7 @@ e.g.
 
 ```
 
-Notes: 
+Notes:   
 - If you use other data storage (any NoSQL DB or RDBMS), you need to implement the *com.ej.delightalk.dao.CommentsDAO* interface to provide data communications with your data storage.
 
 
