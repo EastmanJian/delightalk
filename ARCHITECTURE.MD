@@ -1,6 +1,10 @@
 DELIGHTALK Commenting System Architecture
 =========================================
 
+Table of Content
+----------------
+* [Data Elements](#data-elements)
+* [Access Pattern](#access-pattern)
 
 Data Elements
 -------------
