@@ -1,6 +1,6 @@
 About DELIGHTALK
 ================
-[![GitHub stars](https://img.shields.io/github/stars/EastmanJian/delightalk.svg)](https://github.com/EastmanJian/delightalk/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/EastmanJian/delightalk.svg?style=social&label=Stars)](https://github.com/EastmanJian/delightalk/stargazers)
 
 **Delightalk** is an open source web page commenting System. It's lightway, fast, pluginable and extensible. And it can be easily be pluged into your website.
 
