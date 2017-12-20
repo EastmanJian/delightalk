@@ -210,5 +210,5 @@ Management Console
 
 Concurrency
 -----------
-The transaction management for read and write comment data. [Todo]
+The transaction control is required for read and write comment data to avoid concurrency issues. [Todo]  
 For Redis storage implementation, so far it won't lead to severe concurrency issue because the key is MD5 id based (not incremental number key). But it is possible read uncommitted data. In that case empty value will be return. To improve the transaction management for Redis access in the next version.
