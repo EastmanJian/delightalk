@@ -33,9 +33,9 @@ Features
 
 How to plug Delightalk into your website?
 -----------------------------------------
-## Using existing REST service provided by eastmanjian.cn
+### Using existing REST service provided by eastmanjian.cn
 
-## 
+### 
 
 Architecture
 ------------
