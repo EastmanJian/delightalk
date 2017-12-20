@@ -7,8 +7,8 @@ Delightalk is web page commenting System. It's lightway, fast, and extensible. A
 Features
 --------
 
-Plug Delightalk into your website
----------------------------------
+How to plug Delightalk into your website
+----------------------------------------
 
 Architecture
 ------------
