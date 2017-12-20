@@ -10,7 +10,7 @@ Table of Contents
 -----------------
 - [Features](#features)
 - [How to plug Delightalk into your website?](#how-to-plug-delightalk-into-your-website)
-    - [Using plugin scripts with existing REST service]()
+    - [Using plugin scripts with existing REST service](#using-existing-rest-service-provided-by-eastmanjiancn)
     - 
 
 Features
@@ -34,8 +34,30 @@ Features
 How to plug Delightalk into your website?
 -----------------------------------------
 ### Using existing REST service provided by eastmanjian.cn
+Plug the following codes into your web page where you wish the comments appear.
+```html
+<!-- Delightalk codes --> 
+<div id="delightalk"></div>
+<link rel="stylesheet" type="text/css" href="https://eastmanjian.cn/delightalk/css/delightalk.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>var delightParams = {siteName: "your_app_id", previousComments: 10};</script>
+<script src="https://eastmanjian.cn/delightalk/js/delightalk.js"></script>
+```
+Specify your your web application id (your_app_id) and the number of comments to show (previousComments).
+By doing this, you use the shared data storage in eastmanjian.cn. Where a Redis in-memory data storage is provided. But due to memory limitation. Currently only reserved 100mb for all users (not each user :-). If the data exceed 100mb, data will be evicted on a LFU (Least Frequently Usage) basis.
+Alternatively, you can setup your own data storage and REST service in your own server. 
 
-### 
+### Setup data storage and REST service
+1. Download the whole Delightalk project from GitHub.
+2. Setup Redis (4.0.2 or above). For detail, refer to https://redis.io/download.
+3. Configure src/main/resources/redis.properties for the Redis connection parameters.
+4. Change the delightParams.restServiceUrl parameter in src/main/webapp/js/delightalk.js to "https://{your.domian.name}/{delightalk_app_name}/rest/"; 
+5. Build the project by Maven. e.g. 'mvn package'
+6. Deploy the generated delightalk.war to your web application server.
+
+Notes: 
+- If you use other data storage (any NoSQL DB or RDBMS), you need to implement the *com.ej.delightalk.dao.CommentsDAO* interface to provide data communications with your data storage.
+
 
 Architecture
 ------------
