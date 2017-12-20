@@ -12,6 +12,9 @@ Table of Contents
 - [How to plug Delightalk into your website?](#how-to-plug-delightalk-into-your-website)
     - [Using plugin scripts with existing REST service](#using-existing-rest-service-provided-by-eastmanjiancn)
     - [Setup data storage and REST service](#setup-data-storage-and-rest-service)
+- [Architecture](#architecture)
+- [Donate](#donate)
+- [License](#license)
 
 Features
 --------
@@ -51,10 +54,25 @@ Alternatively, you can setup your own data storage and REST service in your own 
 ### Setup data storage and REST service
 1. Download the whole Delightalk project from GitHub.
 2. Setup Redis (4.0.2 or above). For detail, refer to https://redis.io/download.
-3. Configure src/main/resources/redis.properties for the Redis connection parameters.
-4. Change the delightParams.restServiceUrl parameter in src/main/webapp/js/delightalk.js to "https://{your.domian.name}/{delightalk_app_name}/rest/"; 
+3. Configure *src/main/resources/redis.properties* for the Redis connection parameters.
+4. Change the *delightParams.restServiceUrl* parameter in *src/main/webapp/js/delightalk.js* to your domain URL location
+e.g.
+```
+"https://your.domian.name/delightalk/rest/"; 
+```
 5. Build the project by Maven. e.g. 'mvn package'
 6. Deploy the generated delightalk.war to your web application server.
+7. Change the URL for *delightalk.css* and *delightalk.js* in the plugin codes.
+e.g.
+```html
+<!-- Delightalk codes --> 
+<div id="delightalk"></div>
+<link rel="stylesheet" type="text/css" href="https://your.domain.name/delightalk/css/delightalk.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>var delightParams = {siteName: "your_app_id", previousComments: 10};</script>
+<script src="https://your.domain.name/delightalk/js/delightalk.js"></script>
+
+```
 
 Notes: 
 - If you use other data storage (any NoSQL DB or RDBMS), you need to implement the *com.ej.delightalk.dao.CommentsDAO* interface to provide data communications with your data storage.
@@ -66,6 +84,9 @@ Architecture
 
 Donate
 ------
+Invite me a cup of drink. Your donation inspire me to improve the application.  
+![Alipay](https://ejres-1253687085.picgz.myqcloud.com/img/barcode/alipay_s.jpg)
+![Wechat](https://ejres-1253687085.picgz.myqcloud.com/img/barcode/wechat_s.png)
 
 License
 -------
