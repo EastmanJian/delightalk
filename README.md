@@ -11,7 +11,7 @@ Table of Contents
 - [Features](#features)
 - [How to plug Delightalk into your website?](#how-to-plug-delightalk-into-your-website)
     - [Using plugin scripts with existing REST service](#using-existing-rest-service-provided-by-eastmanjiancn)
-    - 
+    - [Setup data storage and REST service](#setup-data-storage-and-rest-service)
 
 Features
 --------
@@ -43,9 +43,10 @@ Plug the following codes into your web page where you wish the comments appear.
 <script>var delightParams = {siteName: "your_app_id", previousComments: 10};</script>
 <script src="https://eastmanjian.cn/delightalk/js/delightalk.js"></script>
 ```
-Specify your your web application id (your_app_id) and the number of comments to show (previousComments).
-By doing this, you use the shared data storage in eastmanjian.cn. Where a Redis in-memory data storage is provided. But due to memory limitation. Currently only reserved 100mb for all users (not each user :-). If the data exceed 100mb, data will be evicted on a LFU (Least Frequently Usage) basis.
-Alternatively, you can setup your own data storage and REST service in your own server. 
+Specify your your web application id (your_app_id) and the number of comments to show (previousComments).  
+  
+By doing this, you use the shared data storage in eastmanjian.cn. Where a Redis in-memory data storage is provided. But due to memory limitation. Currently only reserved 100mb for all users (not each user :-). If the data exceed 100mb, data will be evicted on a LFU (Least Frequently Usage) basis.  
+Alternatively, you can setup your own data storage and REST service in your own server, as describe below. 
 
 ### Setup data storage and REST service
 1. Download the whole Delightalk project from GitHub.
