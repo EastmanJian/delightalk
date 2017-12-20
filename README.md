@@ -57,10 +57,10 @@ Alternatively, you can setup your own data storage and REST service in your own 
 1. Download the whole Delightalk project from GitHub.
 2. Setup Redis (4.0.2 or above). For detail, refer to https://redis.io/download.
 3. Configure *src/main/resources/redis.properties* for the Redis connection parameters.
-4. Change the *delightParams.restServiceUrl* parameter in *src/main/webapp/js/delightalk.js* to your domain URL location
+4. Change the *delightParams.restServiceUrl* parameter in *src/main/webapp/js/delightalk.js* to your domain URL location.  
 e.g.  
-```
-"https://your.domian.name/delightalk/rest/"; 
+```js
+delightParams.restServiceUrl = "https://your.domian.name/delightalk/rest/"; 
 ```
 5. Build the project by Maven. e.g. 'mvn package'
 6. Deploy the generated delightalk.war to your web application server.
