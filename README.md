@@ -15,4 +15,4 @@ Architecture
 
 License
 -------
-![license](https://github.com/EastmanJian/delightalk/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/EastmanJian/delightalk/blob/master/LICENSE)
