@@ -1,6 +1,6 @@
 DELIGHTALK Commenting System Architecture
 =========================================
-[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)]()
+
 
 Table of Content
 ----------------
