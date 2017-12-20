@@ -21,7 +21,7 @@ Data Elements
     - content
     - agree [Todo]
     - disagree [Todo]
-    - emoji
+    - emoji [Todo]
 
 Access Pattern
 --------------
@@ -31,7 +31,7 @@ Access Pattern
 - read last N to M comments (for the 'more comments' feature) [Todo]
 - modify a comment [Todo]
 - delete a comment [Todo]
-- increase agree [Todo]
+- increase agree/disagree [Todo]
 
 ### Management Console
 [Todo]

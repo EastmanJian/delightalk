@@ -1,5 +1,7 @@
 /**
+ * Delightalk commenting
  * Copyright (c) 2017 Eastman Jian; Licensed MIT
+ * https://github.com/EastmanJian/delightalk
  */
 
 
@@ -7,6 +9,7 @@
  * Initiate Delightalk parameters.
  */
 delightParams.pageUrlId = location.hostname + location.pathname;
+delightParams.restServiceUrl = "https://eastmanjian.cn/delightalk/rest/";
 
 /**
  * Initiate Delightalk section.
@@ -62,8 +65,7 @@ function addDelightalkComment() {
         comment: commentContent
     };
     ajaxRestReq({
-        //url: 'http://localhost:8080/delightalk/rest/' + delightParams.siteName + '/addComment/',  //local test
-        url: 'https://eastmanjian.cn/delightalk/rest/' + delightParams.siteName + '/addComment/',    //remote server test
+        url: delightParams.restServiceUrl + delightParams.siteName + '/addComment/',    //remote server test
         type: 'POST',
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(commentItem),
@@ -102,8 +104,7 @@ function getDelightalkRecentComments() {
         lastN: delightParams.previousComments
     };
     ajaxRestReq({
-        //url: 'http://localhost:8080/delightalk/rest/' + delightParams.siteName + '/getRecentComments',  //local server test
-        url: 'https://eastmanjian.cn/delightalk/rest/' + delightParams.siteName + '/getRecentComments',  //remote server test
+        url: delightParams.restServiceUrl + delightParams.siteName + '/getRecentComments',  //remote server test
         type: 'PUT',
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(requestData),
