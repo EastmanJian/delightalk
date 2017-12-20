@@ -7,8 +7,8 @@ About DELIGHTALK
 Features
 --------
 
-How to plug Delightalk into your website
-----------------------------------------
+How to plug Delightalk into your website?
+-----------------------------------------
 
 Architecture
 ------------
