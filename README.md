@@ -12,7 +12,7 @@ How to plug Delightalk into your website
 
 Architecture
 ------------
-[![Architecture](https://img.shields.io/badge/Architecture-REST-lightgrey.svg)](https://github.com/EastmanJian/delightalk/blob/master/ARCHITECTURE.MD)
+[![Architecture](https://img.shields.io/badge/Architecture-RESTful-brightgreen.svg)](https://github.com/EastmanJian/delightalk/blob/master/ARCHITECTURE.MD)
 
 License
 -------
