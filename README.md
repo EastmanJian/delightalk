@@ -60,7 +60,7 @@ Alternatively, you can setup your own data storage and REST service in your own 
 4. Change the *delightParams.restServiceUrl* parameter in *src/main/webapp/js/delightalk.js* to your domain URL location.  
 e.g.  
 ```js
-delightParams.restServiceUrl = "https://your.domian.name/delightalk/rest/"; 
+delightParams.restServiceUrl = "https://your.domain.name/delightalk/rest/"; 
 ```
 5. Build the project by Maven. e.g. 'mvn package'
 6. Deploy the generated delightalk.war to your web application server.
