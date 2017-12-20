@@ -6,6 +6,11 @@ About DELIGHTALK
 
 ![Delightalk Sample](https://ejres-1253687085.picgz.myqcloud.com/img/delightalk/Delightalk_sample1.jpg)
 
+Table of Contents
+-----------------
+- [Features](#features)
+- [Features](#how-t)
+
 Features
 --------
 - Fast access powered by in-memory NoSQL data storage
@@ -13,12 +18,16 @@ Features
 - Configurable for site name, and the number of historical comments to be retrieved
 - Support user named or ananymous comments
 - Logged user IP
-- You can setup and extend data storage with other DBMS
+- You can setup and extend data storage with other DBMS  
+
 **Up coming features**
 - Emoji
 - Agree or disagree a comment
 - User location identified by IP
-- 
+- Incrementally read more historical comments
+- Configurable placeholder texts, random pickup if more than one placeholder texts.
+- Slim plugin scripts by providing more default configurations
+- Management Console to deal with site comments.
 
 How to plug Delightalk into your website?
 -----------------------------------------
