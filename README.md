@@ -14,6 +14,9 @@ Architecture
 ------------
 [![Architecture](https://img.shields.io/badge/Architecture-RESTful-brightgreen.svg)](https://github.com/EastmanJian/delightalk/blob/master/ARCHITECTURE.MD)
 
+Donate
+------
+
 License
 -------
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/EastmanJian/delightalk/blob/master/LICENSE)
