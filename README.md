@@ -9,7 +9,9 @@ About DELIGHTALK
 Table of Contents
 -----------------
 - [Features](#features)
-- [Features](#how-t)
+- [How to plug Delightalk into your website?](#how-to-plug-delightalk-into-your-website)
+    - [Using plugin scripts with existing REST service]()
+    - 
 
 Features
 --------
@@ -31,6 +33,9 @@ Features
 
 How to plug Delightalk into your website?
 -----------------------------------------
+## Using existing REST service provided by eastmanjian.cn
+
+## 
 
 Architecture
 ------------
