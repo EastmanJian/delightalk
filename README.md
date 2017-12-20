@@ -15,3 +15,4 @@ Architecture
 
 License
 -------
+![license](https://github.com/EastmanJian/delightalk/blob/master/LICENSE)
