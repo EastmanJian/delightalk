@@ -10,8 +10,8 @@ Table of Content
     - [Front-end](#front-end)
     - [Management Console](#management-console)
 * [Data Store](#data-store)
-    1) [Redis](#redis)
-    2) [MySQL](#mysql)
+    1) [Redis](#1-redis)
+    2) [MySQL](#2-mysql)
 * [Common Data Access Interface](#common-data-access-interface)
 * [Redis DAO implementation](#redis-dao-implementation)
 * [RESTful Interface](#restful-interface)
@@ -140,7 +140,8 @@ LTRIM "comments:ejBlog:9e9a5923e83e7db270518fc27e30cdca" -100 -1
 ...
 ```
 
-### 2) MySQL [Todo]
+### 2) MySQL 
+[Todo]
 
 
 
