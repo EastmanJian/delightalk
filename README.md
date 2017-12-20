@@ -8,6 +8,17 @@ About DELIGHTALK
 
 Features
 --------
+- Fast access powered by in-memory NoSQL data storage
+- Pluginable to any webpage
+- Configurable for site name, and the number of historical comments to be retrieved
+- Support user named or ananymous comments
+- Logged user IP
+- You can setup and extend data storage with other DBMS
+**Up coming features**
+- Emoji
+- Agree or disagree a comment
+- User location identified by IP
+- 
 
 How to plug Delightalk into your website?
 -----------------------------------------
