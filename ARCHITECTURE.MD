@@ -4,8 +4,27 @@ DELIGHTALK Commenting System Architecture
 
 Table of Content
 ----------------
+* [Architecture Diagram](#architecture-diagram)
 * [Data Elements](#data-elements)
 * [Access Pattern](#access-pattern)
+    - [Front-end](#front-end)
+    - [Management Console](#management-console)
+* [Data Store](#data-store)
+    1) [Redis](#1-redis)
+    2) [MySQL](#2-mysql)
+* [Common Data Access Interface](#common-data-access-interface)
+* [Redis DAO implementation](#redis-dao-implementation)
+* [RESTful Interface](#restful-interface)
+* [Front-end Javascript Embedding](#front-end-javascript-embedding)
+    - [Functional Design](#functional-design)
+    - [UI Design (CSS)](#ui-design-css)
+    - [Configuration](#configuration)
+* [Management Console](#management-console)
+* [Concurrency](#Concurrency)
+
+Architecture Diagram
+--------------------
+![Architecture Diagram](https://ejres-1253687085.picgz.myqcloud.com/img/delightalk/architecture.svg)
 
 Data Elements
 -------------
@@ -121,7 +140,8 @@ LTRIM "comments:ejBlog:9e9a5923e83e7db270518fc27e30cdca" -100 -1
 ...
 ```
 
-### 2) MySQL [Todo]
+### 2) MySQL 
+[Todo]
 
 
 
@@ -190,3 +210,5 @@ Management Console
 
 Concurrency
 -----------
+The transaction control is required for read and write comment data to avoid concurrency issues. [Todo]  
+For Redis storage implementation, so far it won't lead to severe concurrency issue because the key is MD5 id based (not incremental number key). But it is possible read uncommitted data. In that case empty value will be return. To improve the transaction management for Redis access in the next version.
