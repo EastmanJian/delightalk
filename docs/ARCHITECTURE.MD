@@ -180,11 +180,12 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"pageURL":"ejTest.cn/bl
 Front-end Javascript Embedding
 ------------------------------
 ### Functional Design
-- An add comment section go first
-- Follow by the recent n comments section.
+- An add comment section go first.
+- Followed by, there is the recent n comments section
+- Simplify the plugin codes, dynamically importing css files [Todo]
+- make delightParams default values, so that setting delightParams is optional to user. [Todo]
 - save user name at local storage [Todo]
 - a few random placeholder words or sentences [Todo]
-- make delightParams default values, so that setting delightParams is optional to user. [Todo]
 - 'More comments', when user click the 'more' button, display last 2n/3n/4n/... historical comments for each click, until all the historical comments are retrieved. [Todo]
 - display where is the user from by identify the geo-source of the IP [Todo]
 - limit the word count of a input comment [Todo]
