@@ -85,8 +85,7 @@ Architecture
 Donate
 ------
 Invite me a cup of drink. Your donation inspire me to improve the application.  
-![Alipay](https://ejres-1253687085.picgz.myqcloud.com/img/barcode/alipay_s.jpg)
-<pre>        </pre>
+![Alipay](https://ejres-1253687085.picgz.myqcloud.com/img/barcode/alipay_s.jpg)　　　　　　　　
 ![Wechat](https://ejres-1253687085.picgz.myqcloud.com/img/barcode/wechat_s.png)
 
 License
