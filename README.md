@@ -82,7 +82,7 @@ Notes:
 
 Architecture
 ------------
-[![Architecture](https://img.shields.io/badge/Architecture-RESTful-brightgreen.svg)](https://github.com/EastmanJian/delightalk/blob/master/ARCHITECTURE.MD)
+[![Architecture](https://img.shields.io/badge/Architecture-RESTful-brightgreen.svg)](./docs/ARCHITECTURE.MD)
 
 Donate
 ------
