@@ -79,7 +79,7 @@ e.g.
 
 Notes:   
 - If you use other data storage (any NoSQL DB or RDBMS), you need to implement the *com.ej.delightalk.dao.CommentsDAO* interface to provide data communications with your data storage.
-
+- Change some of the 'provided' scope dependencies in the pom.xml to 'compile' if you are not using GlassFish as the web server, like Tomcat, WebLogic. GlassFish is shipped with JAX-RS Jersey related dependencies, while other web servers might not have, hence you will need to package the dependent jars in the war package for deployment.
 
 Architecture
 ------------
