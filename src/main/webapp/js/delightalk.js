@@ -120,21 +120,21 @@ function renderRecentComments(jsonString) {
     let data = JSON.parse(jsonString);
     let htmlTxt = '';
     for (i = data.recentComments.length - 1; i >= 0; i--) {
-        htmlTxt += '<div class="a-delightalk-comment">';
-        htmlTxt +=   '<header id="recentCmtHeader">';
-        htmlTxt +=     '<span id="delightalkCommentUser">';
-        htmlTxt +=       '<i class="fa fa-user comment-icon" aria-hidden="true"></i>';
-        htmlTxt +=       escapeHtml(data.recentComments[i].user + ' ');
-        htmlTxt +=     '</span>';
-        htmlTxt +=     '<span id="delightalkCommentDate">';
-        htmlTxt +=       '<i class="fa fa-clock-o comment-icon" aria-hidden="true"></i>';
-        htmlTxt +=       (new Date(data.recentComments[i].timestamp)).Format("yyyy-MM-dd hh:mm:ss");
-        htmlTxt +=     '</span>';
-        htmlTxt +=   '</header>';
-        htmlTxt +=   '<article  id="delightalkCommentContent">';
-        htmlTxt +=     escapeHtml(data.recentComments[i].comment);
-        htmlTxt +=   '</article>';
-        htmlTxt += '</div>';
+        htmlTxt += '<div class="a-delightalk-comment">'
+                +    '<header id="recentCmtHeader">'
+                +      '<span id="delightalkCommentUser">'
+                +        '<i class="fa fa-user comment-icon" aria-hidden="true"></i>'
+                +        escapeHtml(data.recentComments[i].user + ' ')
+                +      '</span>'
+                +      '<span id="delightalkCommentDate">'
+                +        '<i class="fa fa-clock-o comment-icon" aria-hidden="true"></i>'
+                +        (new Date(data.recentComments[i].timestamp)).Format("yyyy-MM-dd hh:mm:ss")
+                +      '</span>'
+                +    '</header>'
+                +    '<article  id="delightalkCommentContent">'
+                +      escapeHtml(data.recentComments[i].comment)
+                +    '</article>'
+                +  '</div>';
     }
     document.querySelector("#recentDelightalkComments").innerHTML = htmlTxt;
 }

@@ -26,6 +26,7 @@ Features
 - You can setup and extend data storage with other DBMS  
 
 **Up coming features**
+- eMail input , can be configured as optional or mandatory
 - Emoji
 - Agree or disagree a comment
 - User location identified by IP
