@@ -2,7 +2,8 @@ About DELIGHTALK
 ================
 [![GitHub stars](https://img.shields.io/github/stars/EastmanJian/delightalk.svg?style=social&label=Stars)](https://github.com/EastmanJian/delightalk/stargazers)
 
-**Delightalk** is an open source web page commenting system. It's lightweight, fast, pluginable and extensible. And it can easily be pluged into your website.
+**Delightalk** is an open source web page commenting system. It's lightweight, fast, pluginable and extensible. And it can easily be pluged into your website.  
+Please find a demo web page [![Here](https://img.shields.io/badge/-here-green.svg)](https://eastmanjian.cn/delightalk/pageJsTest.html).
 
 ![Delightalk Sample](https://ejres-1253687085.picgz.myqcloud.com/img/delightalk/Delightalk_sample1.jpg)
 
@@ -79,7 +80,7 @@ e.g.
 
 Notes:   
 - If you use other data storage (any NoSQL DB or RDBMS), you need to implement the *com.ej.delightalk.dao.CommentsDAO* interface to provide data communications with your data storage.
-
+- Change some of the 'provided' scope dependencies in the pom.xml to 'compile' if you are not using GlassFish as the web server, like Tomcat, WebLogic. GlassFish is shipped with JAX-RS Jersey related dependencies, while other web servers might not have, hence you will need to package the dependent jars in the war package for deployment.
 
 Architecture
 ------------
